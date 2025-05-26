@@ -4,6 +4,7 @@ class Habit {
   int streakCount;
   DateTime? lastCompletedDate;
   List<DateTime> completionDates;
+  String notes;
 
   Habit({
     required this.name,
@@ -11,6 +12,7 @@ class Habit {
     this.streakCount = 0,
     this.lastCompletedDate,
     List<DateTime>? completionDates,
+    this.notes = '',
   }) : completionDates = completionDates ?? [];
 
   // Method to convert a Habit object to a Map
@@ -22,6 +24,7 @@ class Habit {
             lastCompletedDate?.toIso8601String(), // Store as ISO 8601 string
         'completionDates':
             completionDates.map((date) => date.toIso8601String()).toList(),
+        'notes': notes,
       };
 
   // Factory constructor to create a Habit object from a Map
@@ -37,6 +40,7 @@ class Habit {
             .where((date) => date != null)
             .cast<DateTime>()
             .toList(),
+        notes: json['notes'] as String? ?? '',
       );
 
   // Helper to check if a date is today

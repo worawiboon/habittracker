@@ -215,7 +215,8 @@ class HabitListPage extends GetView<HabitController> {
                 child: ListTile(
                   onTap: () {
                     // Add onTap for navigation
-                    Get.to(() => HabitDetailPage(habit: habit));
+                    Get.to(
+                        () => HabitDetailPage(habit: habit, habitIndex: index));
                   },
                   contentPadding: const EdgeInsets.symmetric(
                       vertical: 10.0, horizontal: 16.0),

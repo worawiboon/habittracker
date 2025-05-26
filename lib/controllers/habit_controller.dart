@@ -110,5 +110,26 @@ class HabitController extends GetxController {
     }
   }
 
+  // Method to update notes for a specific habit
+  void updateHabitNotes(int habitGlobalIndex, String newNotes) {
+    // We need to find the habit in the main list by some unique identifier
+    // or pass its direct index if HabitDetailPage knows it.
+    // Assuming HabitDetailPage will provide the correct index from the main habits list.
+    if (habitGlobalIndex >= 0 && habitGlobalIndex < habits.length) {
+      habits[habitGlobalIndex].notes = newNotes;
+      habits
+          .refresh(); // Update the UI if notes are displayed on the main list (not in this case yet)
+      _saveHabitsToStorage(); // Save changes to storage
+      // Potentially update a specific habit instance if GetX is managing individual habit states for detail pages
+      // For now, this direct update and save should be fine if detail page re-reads or is rebuilt.
+      Get.snackbar("Notes Saved",
+          "Notes for '${habits[habitGlobalIndex].name}' updated.",
+          snackPosition: SnackPosition.BOTTOM);
+    } else {
+      debugPrint(
+          "[HabitController] Error: Tried to update notes for invalid index $habitGlobalIndex");
+    }
+  }
+
   // TODO: พิจารณาการ persist ข้อมูล (เช่น ใช้ GetStorage หรือฐานข้อมูลอื่นๆ)
 }
